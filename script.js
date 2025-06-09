@@ -15,15 +15,15 @@ document.addEventListener("DOMContentLoaded", () => {
   saudacao.textContent = `Olá, ${nome} da turma ${turma}! Escolha uma raspadinha:`;
   container.insertBefore(saudacao, raspadinhasContainer);
 
-  const simbolos = ["🎁 Camiseta da escola!", "🖊️ Caneta personalizada!", "❌ VOCÊ PERDEU", "📚 10% na matrícula!", "🍭 Kit de doces!", "🥤 Copo personalizado!", "🎧 Fones de ouvido!", "🍎 Lanche especial!"];
+  const simbolos = ["🎁 Camiseta da escola", "🖊️ Caneta personalizada", "❌ VOCÊ PERDEU", "📚 10% na matrícula", "🍭 Kit de doces", "🥤 Copo personalizado", "🎧 Fones de ouvido", "🍎 Lanche especial"];
   
   const MAX_TENTATIVAS = 3;
   let tentativasFeitas = 0;
   const raspadinhas = [];
 
   // Sons de vitória e derrota
-  const somVitoria = new Audio("victorymale-version-230553.mp3");
-  const somDerrota = new Audio("game_over.mp3");
+  const somVitoria = new Audio("sons/victorymale-version-230553.mp3");
+  const somDerrota = new Audio("sons/game_over.mp3");
 
   // Cria 3 raspadinhas com símbolos aleatórios
   for (let i = 0; i < MAX_TENTATIVAS; i++) {
