@@ -82,7 +82,3 @@ Gabriel Bandasz e Gabriel Sandes
 
 ![Captura de tela 2025-06-11 151031](https://github.com/user-attachments/assets/4138a874-2abb-411b-99a7-5e90b25ed55f)
 ![Captura de tela 2025-06-11 151044](https://github.com/user-attachments/assets/20e55148-c980-4f07-9510-4e1a32d5bf7b)
-
----
-
-Se quiser, posso gerar o markdown para você copiar direto!
