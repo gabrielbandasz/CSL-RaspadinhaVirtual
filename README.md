@@ -1,76 +1,91 @@
-Projeto Raspadinha Escolar
-Descrição
-Este projeto é uma aplicação web interativa para uma raspadinha virtual com foco em uso escolar. O usuário deve fazer login informando seu nome e turma para participar do sorteio diário de prêmios. A raspadinha utiliza canvas para o efeito visual de raspagem, e o sistema controla a participação única por dia para cada usuário. O projeto também possui tema claro e escuro com persistência da preferência.
+Claro! Aqui está o seu README para o **Projeto Raspadinha Escolar** no estilo organizado e formatado para GitHub, seguindo o modelo que você enviou:
 
-Funcionalidades
-Login personalizado: usuário informa nome e turma para acesso.
+---
 
-Limite diário: cada usuário pode participar apenas uma vez por dia.
+# 🎉 Projeto Raspadinha Escolar
 
-Raspadinha virtual: três cartões com prêmios aleatórios para raspar usando o mouse ou toque.
+## 📝 Descrição
 
-Detecção de vitória: se os três prêmios forem iguais, o usuário ganha.
+Aplicação web interativa para uma raspadinha virtual voltada para uso escolar. O usuário faz login informando nome e turma para participar de um sorteio diário de prêmios. A raspadinha utiliza a API Canvas para o efeito visual de raspagem, garantindo que cada usuário participe apenas uma vez por dia. O sistema também conta com tema claro e escuro, com a preferência do usuário salva localmente.
 
-Feedback visual e sonoro: sons e mensagens indicam vitória ou derrota.
+---
 
-Tema claro/escuro: botão para alternar tema com preferência salva.
+## 🎯 Funcionalidades
 
-Logout: limpa dados do usuário e retorna à tela de login.
+* Login personalizado: nome e turma do usuário para acesso.
+* Limite diário: participação única por usuário a cada dia.
+* Raspadinha virtual: três cartões com prêmios aleatórios para raspar com mouse ou toque.
+* Verificação de vitória: três prêmios iguais indicam vitória.
+* Feedback visual e sonoro para vitória e derrota.
+* Tema claro/escuro com botão para alternar e salvar preferência.
+* Logout para limpar dados e voltar à tela de login.
+* Acessibilidade com atributos ARIA e navegação por teclado.
 
-Acessibilidade: uso de atributos ARIA e navegação por teclado nas raspadinhas.
+---
 
-Tecnologias utilizadas
-HTML5
+## 🛠️ Tecnologias utilizadas
 
-CSS3
+* HTML5
+* CSS3
+* JavaScript (ES6+)
+* API Canvas
+* LocalStorage
 
-JavaScript (ES6+)
+---
 
-API Canvas para efeitos de raspadinha
+## 🚀 Como usar
 
-LocalStorage para persistência de dados
+1. Abra o arquivo `index.html` no navegador.
+2. Na tela de login, informe seu nome e turma, depois clique em **Entrar**.
+3. Raspe os três cartões na tela da raspadinha usando mouse ou toque.
+4. Confira se ganhou (três prêmios iguais).
+5. Apenas uma participação por dia é permitida.
+6. Use o botão para alternar entre tema claro e escuro.
+7. Clique em **Sair** para encerrar sessão e voltar ao login.
 
-Como usar
-Abra o arquivo index.html no navegador.
+---
 
-Na tela de login, insira seu nome e turma e clique em "Entrar".
+## 📁 Estrutura do projeto
 
-Na tela da raspadinha, raspe os três cartões usando o mouse ou toque.
-
-Após raspar os três cartões, veja se você ganhou (3 prêmios iguais).
-
-Você só poderá jogar uma vez por dia.
-
-Use o botão do tema para alternar entre modo claro e escuro.
-
-Clique em "Sair" para encerrar a sessão e voltar à tela de login.
-
-Estrutura do projeto
-
+```
 /css
-  styles.css        # Estilos gerais e temas
+  styles.css          # Estilos gerais e temas
 /js
-  script.js         # Lógica do login, raspadinha e temas
-index.html          # Tela inicial e login
-raspadinha.html     # Tela da raspadinha e jogo
+  script.js           # Lógica do login, raspadinha, temas e controle de participação
+index.html            # Tela de login
+raspadinha.html       # Tela da raspadinha e jogo
 /assets
-  /sounds           # Arquivos de áudio para vitória e derrota
-  /images           # Imagens e ícones do projeto
+  /sounds             # Áudios para feedbacks de vitória e derrota
+  /images             # Imagens e ícones do projeto
+```
 
-Personalização
-Os prêmios podem ser facilmente alterados no arquivo JavaScript, dentro da lista de prêmios.
+---
 
-O tema pode ser ajustado em styles.css.
+## ⚙️ Personalização
 
-Sons podem ser substituídos na pasta /assets/sounds.
+* Prêmios: altere facilmente a lista de prêmios no arquivo `script.js`.
+* Tema: ajuste cores e estilos em `styles.css`.
+* Sons: substitua arquivos na pasta `/assets/sounds`.
 
-Considerações finais
-Este projeto é voltado para uso educacional e demonstra conceitos de interação, persistência local e manipulação gráfica em JavaScript. Pode ser utilizado em escolas para engajar alunos com atividades lúdicas e dinâmicas.
+---
 
-Autor
-Gabriel Bandasz e Gabriel Sandes!
+## 🙌 Considerações finais
 
-Imagens 
-[Captura de tela 2025-06-11 151031](https://github.com/user-attachments/assets/4138a874-2abb-411b-99a7-5e90b25ed55f)
+Projeto voltado para uso educacional, demonstrando conceitos como manipulação gráfica, persistência local e interação com o usuário. Ideal para engajar alunos em atividades lúdicas e dinâmicas nas escolas.
+
+---
+
+## 👨‍💻 Autor
+
+Gabriel Bandasz e Gabriel Sandes
+
+---
+
+## 🖼️ Imagens do projeto
+
+![Captura de tela 2025-06-11 151031](https://github.com/user-attachments/assets/4138a874-2abb-411b-99a7-5e90b25ed55f)
 ![Captura de tela 2025-06-11 151044](https://github.com/user-attachments/assets/20e55148-c980-4f07-9510-4e1a32d5bf7b)
 
+---
+
+Se quiser, posso gerar o markdown para você copiar direto!
