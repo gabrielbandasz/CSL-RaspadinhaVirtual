@@ -1,37 +1,52 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Recupera os dados do aluno armazenados no localStorage
   const nome = localStorage.getItem("nomeAluno");
   const turma = localStorage.getItem("turmaAluno");
+  const hoje = new Date().toISOString().split("T")[0];
+  const chaveParticipacao = `${nome}_${turma}_${hoje}`;
 
+  // Se nome ou turma não estiverem disponíveis, redireciona para a página inicial
   if (!nome || !turma) {
     window.location.href = "index.html";
     return;
   }
 
+  // Se o aluno já participou hoje, redireciona e bloqueia acesso
+  if (localStorage.getItem(chaveParticipacao)) {
+    alert("⚠️ Você já jogou hoje. Volte amanhã!");
+    window.location.href = "index.html";
+    return;
+  }
+
+  // Seleciona elementos do DOM
   const container = document.querySelector(".container");
   const raspadinhasContainer = document.getElementById("raspadinhas");
   const mensagemFinal = document.getElementById("mensagemFinal");
 
+  // Cria saudação personalizada
   const saudacao = document.createElement("h2");
   saudacao.textContent = `Olá, ${nome} da turma ${turma}! Escolha uma raspadinha:`;
   container.insertBefore(saudacao, raspadinhasContainer);
 
-  const simbolos = ["🎁 Camiseta da escola", "🖊️ Caneta personalizada", "❌ VOCÊ PERDEU", "📚 10% na matrícula", "🍭 Kit de doces", "🥤 Copo personalizado", "🎧 Fones de ouvido", "🍎 Lanche especial"];
-  
+  const simbolos = [
+    "🎁 Camiseta da escola", "🖊️ Caneta personalizada", "50% de Desconto na Cantina",
+    "📚 10% na matrícula", "🍭 Kit de doces", "🥤 Copo personalizado",
+    "🎧 Fones de ouvido", "Você Ganhou R$ 50,00"
+  ];
+
   const MAX_TENTATIVAS = 3;
   let tentativasFeitas = 0;
   const raspadinhas = [];
 
-  // Sons de vitória e derrota
   const somVitoria = new Audio("sons/victorymale-version-230553.mp3");
   const somDerrota = new Audio("sons/game_over.mp3");
 
-  // Cria 3 raspadinhas com símbolos aleatórios
+  // Gera raspadinhas com prêmios aleatórios
   for (let i = 0; i < MAX_TENTATIVAS; i++) {
     const simboloAleatorio = simbolos[Math.floor(Math.random() * simbolos.length)];
     raspadinhas.push(simboloAleatorio);
   }
 
-  // Função para criar cada raspadinha visual e lógica
   function criarRaspadinha(simbolo, index) {
     const div = document.createElement("div");
     div.classList.add("raspadinha");
@@ -76,6 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function processarRaspagem() {
       if (raspada) return;
+
       const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
       let pixelsTransparente = 0;
 
@@ -99,29 +115,21 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    canvas.addEventListener("mousedown", () => {
-      if (raspada) return;
-      isDrawing = true;
-    });
-
-    canvas.addEventListener("mouseup", () => {
-      if (!isDrawing) return;
-      isDrawing = false;
-      processarRaspagem();
-    });
-
+    // Eventos mouse e toque
+    canvas.addEventListener("mousedown", () => { if (!raspada) isDrawing = true; });
+    canvas.addEventListener("mouseup", () => { if (isDrawing) { isDrawing = false; processarRaspagem(); } });
     canvas.addEventListener("mousemove", desenhar);
 
     canvas.addEventListener("touchstart", (e) => {
       e.preventDefault();
-      if (raspada) return;
-      isDrawing = true;
+      if (!raspada) isDrawing = true;
     }, { passive: false });
 
     canvas.addEventListener("touchend", () => {
-      if (!isDrawing) return;
-      isDrawing = false;
-      processarRaspagem();
+      if (isDrawing) {
+        isDrawing = false;
+        processarRaspagem();
+      }
     });
 
     canvas.addEventListener("touchmove", (e) => {
@@ -133,35 +141,39 @@ document.addEventListener("DOMContentLoaded", () => {
   function atualizarMensagem() {
     const restantes = MAX_TENTATIVAS - tentativasFeitas;
     mensagemFinal.textContent = restantes > 0
-      ? `Você tem ${restantes} ${restantes > 1 ? '' : ''} raspadinhas restante${restantes > 1 ? 's' : ''}.`
+      ? `Você tem ${restantes} raspadinha${restantes > 1 ? 's' : ''} restante${restantes > 1 ? 's' : ''}.`
       : "⚠️ Você esgotou suas tentativas! Volte amanhã.";
   }
 
   function verificarResultado() {
-    const primeiraRaspadinha = raspadinhas[0];
-    const ganhou = raspadinhas.every(s => s === primeiraRaspadinha);
+    const primeira = raspadinhas[0];
+    const ganhou = raspadinhas.every(s => s === primeira);
+
     if (ganhou) {
-      somVitoria.play(); // Toca o som de vitória
-      mensagemFinal.textContent = `🎉 Parabéns! Você ganhou 3x "${primeiraRaspadinha}"!`;
+      somVitoria.play();
+      mensagemFinal.textContent = `🎉 Parabéns! Você ganhou 3x "${primeira}"!`;
     } else {
-      somDerrota.play(); // Toca o som de derrota
+      somDerrota.play();
       mensagemFinal.textContent = "😞 Não foi dessa vez. Tente novamente amanhã!";
     }
-    // Desativa todas as raspadinhas restantes
+
+    // Marca que o aluno participou hoje
+    localStorage.setItem(chaveParticipacao, "true");
+
+    // Desativa todas as raspadinhas
     document.querySelectorAll(".raspadinha").forEach(div => div.classList.add("desativada"));
   }
 
-  // Cria as 3 raspadinhas
   raspadinhas.forEach((simbolo, idx) => criarRaspadinha(simbolo, idx));
 
+  // Botão de sair
   document.getElementById("sairBtn").addEventListener("click", () => {
     localStorage.removeItem("nomeAluno");
     localStorage.removeItem("turmaAluno");
     window.location.href = "index.html";
   });
 
-  // ===== MODO CLARO / ESCURO =====
-
+  // MODO CLARO / ESCURO
   const toggleThemeBtn = document.getElementById("toggle-theme");
   const body = document.body;
   const temaSalvo = localStorage.getItem("tema") || "claro";
@@ -183,7 +195,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   toggleThemeBtn.addEventListener("click", () => {
     const temaAtual = body.classList.contains("dark") ? "escuro" : "claro";
-    const novoTema = temaAtual === "escuro" ? "claro" : "escuro";
-    aplicarTema(novoTema);
+    aplicarTema(temaAtual === "escuro" ? "claro" : "escuro");
   });
 });
