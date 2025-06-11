@@ -1,6 +1,3 @@
-Claro! Aqui está o seu README para o **Projeto Raspadinha Escolar** no estilo organizado e formatado para GitHub, seguindo o modelo que você enviou:
-
----
 
 # 🎉 Projeto Raspadinha Escolar
 
